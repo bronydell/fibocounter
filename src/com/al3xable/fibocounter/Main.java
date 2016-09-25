@@ -21,19 +21,8 @@
 
 package com.al3xable.fibocounter;
 
-import java.math.BigInteger;
-
 public class Main {
 	public static void main(String[] args) {
-		BigInteger pre = new BigInteger("0");
-		BigInteger cur = new BigInteger("1");
-		BigInteger sum = new BigInteger("1");
-		
-		while (true) {
-			System.out.println(sum);
-			sum = pre.add(cur);
-			pre = cur;
-			cur = sum;
-		}
+		new FiboCounter(null).start();
 	}
 }
