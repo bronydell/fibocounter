@@ -4,8 +4,14 @@ import java.io.File;
 import java.math.BigInteger;
 
 public class FiboCounter {
+	File _outputFile = null;
+	
 	public FiboCounter(File outputFile) {
-		
+		_outputFile = outputFile;
+	}
+	
+	private void _out(String str) {
+		System.out.println(str);
 	}
 	
 	public void start() {
@@ -14,7 +20,7 @@ public class FiboCounter {
 		BigInteger sum = new BigInteger("1");
 		
 		while (true) {
-			System.out.println(sum);
+			_out(sum.toString());
 			sum = pre.add(cur);
 			pre = cur;
 			cur = sum;
