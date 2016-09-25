@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 public class FiboCounter {
-	String _outputFile = null;
-	BufferedWriter _writer = null;
+	private String _outputFile = null;
+	private BufferedWriter _writer = null;
 	
-	BigInteger _pre = new BigInteger("0");
-	BigInteger _cur = new BigInteger("1");
-	int _line = 1;
+	private BigInteger _pre = new BigInteger("0");
+	private BigInteger _cur = new BigInteger("1");
+	private int _line = 1;
 	
 	public FiboCounter(String outputFile) {
 		_outputFile = outputFile;
