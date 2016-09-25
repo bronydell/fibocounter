@@ -9,6 +9,10 @@ public class FiboCounter {
 	String _outputFile = null;
 	BufferedWriter _writer = null;
 	
+	BigInteger _pre = new BigInteger("0");
+	BigInteger _cur = new BigInteger("1");
+	int _line = 1;
+	
 	public FiboCounter(String outputFile) {
 		_outputFile = outputFile;
 		
@@ -21,7 +25,7 @@ public class FiboCounter {
 		}
 	}
 	
-	private void _out(String number, int id) {
+	private void _out(String number, int line) {
 		if (_writer != null) {
 			try {
 				_writer.write(number + '\n');
@@ -30,24 +34,32 @@ public class FiboCounter {
 				e.printStackTrace();
 			}
 			
-			System.out.println(id);
+			System.out.println(line);
 		} else {
 			System.out.println(number);
 		}
 	}
 	
 	public void start() {
-		BigInteger pre = new BigInteger("0");
-		BigInteger cur = new BigInteger("1");
-		BigInteger sum = new BigInteger("1");
-		int id = 1;
+		if (_line == 1) {
+			_out("1", 1);
+		}
+		
+		BigInteger sum;
 		
 		while (true) {
-			_out(sum.toString(), id);
-			sum = pre.add(cur);
-			pre = cur;
-			cur = sum;
-			id++;
+			_line++;
+			sum = _pre.add(_cur);
+			_pre = _cur;
+			_cur = sum;
+			_out(sum.toString(), _line);
+			
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
