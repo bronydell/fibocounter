@@ -47,8 +47,6 @@ public class Main {
         }
 
         String outputFile = cmd.getOptionValue("output");
-        if (outputFile == null)
-            outputFile = "out.dat";
         new FiboCounter(outputFile).start();
     }
 }

@@ -12,43 +12,44 @@ public class FiboCounter {
     private int _line = 1;
 
     public FiboCounter(String outputFile) {
-        try {
-            ReadLastState(outputFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         _outputFile = outputFile;
 
         try {
             if (_outputFile != null) {
-                _writer = new BufferedWriter(new FileWriter(outputFile));
+            	if (new File(_outputFile).exists()) {
+            		_readLastState();
+            	}
+                _writer = new BufferedWriter(new FileWriter(outputFile, true));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void ReadLastState(String fileName) throws IOException {
-
-        BufferedReader br = new BufferedReader(new FileReader(fileName));
+    private void _readLastState() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(_outputFile));
 
         String endLine = null;
         String preEndLine = null;
         int lineNumber = 0;
         String sCurrentLine = null;
+        
         while ((sCurrentLine = br.readLine()) != null) {
             preEndLine = endLine;
             endLine = sCurrentLine;
             lineNumber++;
         }
+        
         if (preEndLine != null && endLine != null) {
-            this._line = lineNumber;
+            _line = lineNumber;
             System.out.println("Line number: " + lineNumber);
-            this._pre = new BigInteger(preEndLine);
+            _pre = new BigInteger(preEndLine);
             System.out.println("Pre-end number: " + preEndLine);
-            this._cur = new BigInteger(endLine);
+            _cur = new BigInteger(endLine);
             System.out.println("End number: " + endLine);
         }
+        
+        br.close();
     }
 
     private void _out(String number, int line) {
